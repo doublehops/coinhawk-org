@@ -13,7 +13,7 @@ namespace app\models;
  *
  * @property Market $market
  */
-class MarketHistory extends \yii\db\ActiveRecord
+class Market extends BaseModel
 {
 	/**
 	 * @inheritdoc

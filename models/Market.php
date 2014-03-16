@@ -22,7 +22,7 @@ namespace app\models;
  * @property Exchange $exchange
  * @property MarketHistory[] $marketHistories
  */
-class Market extends \yii\db\ActiveRecord
+class Market extends BaseModel
 {
 	/**
 	 * @inheritdoc
