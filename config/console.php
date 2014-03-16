@@ -24,6 +24,14 @@ return [
 			],
 		],
 		'db' => $db,
+        'cryptsyMarket' => [
+            'class' => 'app\components\CryptsyMarket',
+        ],
+        'baseMailer' => [
+            'class' => 'app\components\BaseMailer',
+            'from' => 'damien@doublehops.com',
+            'fromName' => 'Coin Hawk',
+        ],
 	],
 	'params' => $params,
 ];

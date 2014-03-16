@@ -19,6 +19,10 @@ namespace app\models;
  */
 class ScheduledEmailTask extends BaseModel
 {
+    CONST STATUS_SCHEDULED = 'scheduled';
+    CONST STATUS_COMPLETED = 'completed';
+    CONST STATUS_CANCELLED = 'cancelled';
+
 	/**
 	 * @inheritdoc
 	 */

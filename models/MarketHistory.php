@@ -13,7 +13,7 @@ namespace app\models;
  *
  * @property Market $market
  */
-class Market extends BaseModel
+class MarketHistory extends BaseModel
 {
 	/**
 	 * @inheritdoc

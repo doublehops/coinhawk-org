@@ -85,4 +85,64 @@ class Market extends BaseModel
 	{
 		return $this->hasMany(MarketHistory::className(), ['market_id' => 'id']);
 	}
+
+    public function updateData($exchange, $data)
+    {
+        foreach($data as $market) {
+
+            $model = Market::find()->where(['exchange_id'=>$exchange->id, 
+                                            'market_id'=>$market['market_id'],
+                                           ]
+                                  )->one();
+
+            $newMarket = false;
+
+            if($model == null) {
+
+                $model = new Market;
+                $model->exchange_id = $exchange->id;
+                $model->market_id = $market['market_id'];
+                $model->label = $market['label'];
+                $model->primary_name = $market['primary_name'];
+                $model->primary_code = $market['primary_code'];
+                $model->secondary_name = $market['secondary_name'];
+                $model->secondary_code = $market['secondary_code'];
+
+                $newMarket = true;
+            }
+
+            $model->last_trade_price = $market['last_trade_price'];
+            $model->volume = $market['volume'];
+            $model->last_trade_time = $market['last_trade_time'];
+
+            $model->save();
+
+            $siteConfig = SiteConfig::find(1);
+
+            if($newMarket && $siteConfig->send_notifications == 1) {
+                // @todo: Have this chunk of code working in it's own method
+                //$this->sendNewMarketNotification();
+                $email = new ScheduledEmailTask;
+                $email->to = 'damien@doublehops.com';
+                $email->to_name = 'Damien Buttler';
+                $email->from = 'damien@doublehops.com';
+                $email->from_name = 'Coin Hawk';
+                $email->subject = $model->exchange->name .' has added new market '. $model->label;
+                $email->body = $this->renderPartial('//mail/_newMarket', ['exchange'=>$exchange,'market'=>$model->label], true);
+                $email->status = ScheduledEmailTask::STATUS_SCHEDULED;
+                $email->scheduled_at = date('Y-m-d H:i:s');
+                $email->save();
+            }
+
+            $marketHistory = new MarketHistory;
+            $marketHistory->market_id = $model->id;
+            $marketHistory->price = $model->last_trade_price;
+            $marketHistory->save();
+        }
+    }
+
+    public function sendNewMarketNotification()
+    {
+        // @todo: move notification code to here
+    }
 }
