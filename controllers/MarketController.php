@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Market;
+use app\models\ScheduledEmailTask;
 use app\models\search\MarketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,6 +15,20 @@ use yii\web\VerbFilter;
  */
 class MarketController extends Controller
 {
+    public function actionTest()
+    {
+        $email = new ScheduledEmailTask;
+
+        $email->from = 'damien@doublehops.com';
+        $email->from_name = 'Coin Hawk';
+        $email->subject = 'ne subject';
+        $email->body = 'this is the body';
+        $email->status = ScheduledEmailTask::STATUS_IDLE;
+        $email->scheduled_at = date('Y-m-d H:i:s');
+        $email->addAddresses(array('d@d.com', 'e@d.com'=>'John'));
+        $email->save();
+    }
+
 	public function behaviors()
 	{
 		return [

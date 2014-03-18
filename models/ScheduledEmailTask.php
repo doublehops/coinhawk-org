@@ -19,9 +19,38 @@ namespace app\models;
  */
 class ScheduledEmailTask extends BaseModel
 {
+    CONST STATUS_IDLE      = 'idle';
     CONST STATUS_SCHEDULED = 'scheduled';
     CONST STATUS_COMPLETED = 'completed';
     CONST STATUS_CANCELLED = 'cancelled';
+
+    protected $addresses;
+
+    /**
+     * Add addresses
+     *
+     * @param array Values can either be key=>value ('email'=>'name') or
+     *  just email
+     *  
+     *  eg. $address = array('john@domain.com'=>'john', 'bob@domain.com');
+     */
+    public function addAddresses(array $addresses)
+    {
+        foreach($addresses as $address => $name) {
+            // Check if $address is an email or int key
+            if(is_int($address)) {
+                if(!filter_var($name, FILTER_VALIDATE_EMAIL))
+                    throw new Exception(500, 'Not a valid email address');
+
+                $this->addresses[$name] = $name;
+            } else {
+                if(!filter_var($address, FILTER_VALIDATE_EMAIL))
+                    throw new Exception(500, 'Not a valid email address');
+
+                    $this->addresses[$address] = $name;
+            }
+        }
+    }
 
 	/**
 	 * @inheritdoc
@@ -37,10 +66,10 @@ class ScheduledEmailTask extends BaseModel
 	public function rules()
 	{
 		return [
-			[['to', 'to_name', 'from', 'from_name', 'subject', 'body', 'status'], 'required'],
+			[['from', 'from_name', 'subject', 'body', 'status'], 'required'],
 			[['body', 'status'], 'string'],
-			[['scheduled_at', 'created_at', 'updated_at'], 'safe'],
-			[['to', 'to_name', 'from', 'from_name', 'subject'], 'string', 'max' => 255]
+			[['scheduled_at'], 'safe'],
+			[['from', 'from_name', 'subject'], 'string', 'max' => 255]
 		];
 	}
 
@@ -63,4 +92,18 @@ class ScheduledEmailTask extends BaseModel
 			'updated_at' => 'Updated At',
 		];
 	}
+
+    public function afterSave($insert)
+    {
+        foreach($this->addresses as $address => $name) {
+
+            $recipient = new EmailRecipient();
+            $recipient->email_id = $this->id;
+            $recipient->email = $address;
+            $recipient->name = $name;
+            $recipient->save();
+        }
+
+        return parent::afterSave($insert);
+    }
 }

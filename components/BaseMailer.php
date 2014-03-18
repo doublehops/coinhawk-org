@@ -2,6 +2,8 @@
 
 namespace app\components;
 
+use \app\models\ScheduledEmailTask;
+
 require \Yii::$app->basePath .'/vendor/phpmailer/phpmailer/class.phpmailer.php';
 
 class BaseMailer extends \Yii\base\Component
@@ -21,6 +23,8 @@ class BaseMailer extends \Yii\base\Component
     public $subject;
     public $body;
 
+    protected $addresses = array();
+
     public function init()
     {
         $this->mail = new \PHPMailer();
@@ -36,20 +40,21 @@ class BaseMailer extends \Yii\base\Component
         $this->mail->Password = $this->password;
         $this->mail->From = $this->from;
         $this->mail->FromName = $this->fromName;
+
+        $this->mail->status = ScheduledEmailTask::STATUS_IDLE;
     }
 
     public function send()
     {
-        $this->mail->send();
-    }    
+        if(count($this->addresses) < 1)
+            throw new Exception(500, 'Addresses have not been supplied');
 
-    public function addAddress($address, $name=null)
-    {
-        if($name != null)
-            $this->mail->addAddress($address, $name);
-        else
-            $this->mail->addAddress($address);
-    }
+        if(!$this->mail->send())
+            throw new Exception(500, 'Unable to save email');
+
+        $this->email->status = ScheduledEmailTask::STATUS_SCHEDULED;
+        $this->email->save();
+    }    
 
     public function addSubject($subject)
     {
