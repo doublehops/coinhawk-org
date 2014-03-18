@@ -26,7 +26,7 @@ class MarketController extends Controller
         $email->status = ScheduledEmailTask::STATUS_IDLE;
         $email->scheduled_at = date('Y-m-d H:i:s');
         $email->addAddresses(array('d@d.com', 'e@d.com'=>'John'));
-        $email->save();
+        $email->send();
     }
 
 	public function behaviors()

@@ -93,7 +93,16 @@ class ScheduledEmailTask extends BaseModel
 		];
 	}
 
-    public function afterSave($insert)
+    public function send()
+    {
+        $this->save();
+        $this->saveRecipients();
+
+        $this->status = self::STATUS_SCHEDULED;
+        $this->save();
+    }
+
+    public function saveRecipients()
     {
         foreach($this->addresses as $address => $name) {
 
@@ -103,7 +112,5 @@ class ScheduledEmailTask extends BaseModel
             $recipient->name = $name;
             $recipient->save();
         }
-
-        return parent::afterSave($insert);
     }
 }
