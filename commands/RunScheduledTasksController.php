@@ -7,7 +7,6 @@ use app\models\Market;
 use app\models\EmailRecipient;
 use app\models\ScheduledEmailTask;
 use yii\console\Controller;
-use app\components\BaseMailer;
 
 class RunScheduledTasksController extends Controller
 {
@@ -22,7 +21,7 @@ class RunScheduledTasksController extends Controller
 
         foreach($tasks as $task) {
 
-                $body = $this->renderPartial('//mail/template.php', ['content'=>$task->body], true);
+            $body = $this->renderPartial('//mail/template.php', ['content'=>$task->body], true);
 
             foreach($task->recipients as $recipient) {
 
@@ -31,8 +30,6 @@ class RunScheduledTasksController extends Controller
                 $mail->addSubject($task->subject);
                 $mail->addBody($body);
                 $mail->send();
-
-                unset($mail);
             }
 
             $task->status = ScheduledEmailTask::STATUS_COMPLETED;

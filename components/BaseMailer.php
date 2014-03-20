@@ -5,7 +5,6 @@ namespace app\components;
 use \app\models\ScheduledEmailTask;
 use \yii\base\HttpException;
 
-//require \Yii::$app->basePath .'/vendor/phpmailer/phpmailer/class.phpmailer.php';
 
 class BaseMailer extends \Yii\base\Object
 {
@@ -17,12 +16,6 @@ class BaseMailer extends \Yii\base\Object
 
     public $from = 'damien@doublehops.com';
     public $fromName = 'Coin Hawk';
-
-    public $to;
-    public $toName;
-
-    public $subject;
-    public $body;
 
     public function init()
     {
@@ -61,7 +54,6 @@ class BaseMailer extends \Yii\base\Object
 
     public function addSubject($subject)
     {
-        $this->subject = $subject;
         $this->mail->Subject = $subject;
     }
 
