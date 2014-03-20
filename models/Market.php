@@ -123,15 +123,14 @@ class Market extends BaseModel
                 // @todo: Have this chunk of code working in it's own method
                 //$this->sendNewMarketNotification();
                 $email = new ScheduledEmailTask;
-                $email->to = 'damien@doublehops.com';
-                $email->to_name = 'Damien Buttler';
+                $email->addAddresses(['damien@doublehops.com'=>'Damien']);;
                 $email->from = 'damien@doublehops.com';
                 $email->from_name = 'Coin Hawk';
                 $email->subject = $model->exchange->name .' has added new market '. $model->label;
                 $email->body = $this->renderPartial('//mail/_newMarket', ['exchange'=>$exchange,'market'=>$model->label], true);
                 $email->status = ScheduledEmailTask::STATUS_SCHEDULED;
                 $email->scheduled_at = date('Y-m-d H:i:s');
-                $email->save();
+                $email->send();
             }
 
             $marketHistory = new MarketHistory;

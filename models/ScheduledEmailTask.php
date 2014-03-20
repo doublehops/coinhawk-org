@@ -42,7 +42,7 @@ class ScheduledEmailTask extends BaseModel
             // Check if $address is an email or int key
             if(is_int($address)) {
                 if(!filter_var($name, FILTER_VALIDATE_EMAIL))
-                    throw new Exception(500, 'Not a valid email address');
+                    die('Not a valid email address');
 
                 $this->addresses[$name] = $name;
             } else {
