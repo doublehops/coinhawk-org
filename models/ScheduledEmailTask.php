@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\EmailRecipient;
+
 /**
  * This is the model class for table "scheduled_email_task".
  *
@@ -112,5 +114,10 @@ class ScheduledEmailTask extends BaseModel
             $recipient->name = $name;
             $recipient->save();
         }
+    }
+
+    public function getRecipients()
+    {
+        return $this->hasMany(EmailRecipient::className(), ['email_id' => 'id']);
     }
 }

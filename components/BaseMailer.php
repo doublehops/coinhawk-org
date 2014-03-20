@@ -3,10 +3,11 @@
 namespace app\components;
 
 use \app\models\ScheduledEmailTask;
+use \yii\base\HttpException;
 
-require \Yii::$app->basePath .'/vendor/phpmailer/phpmailer/class.phpmailer.php';
+//require \Yii::$app->basePath .'/vendor/phpmailer/phpmailer/class.phpmailer.php';
 
-class BaseMailer extends \Yii\base\Component
+class BaseMailer extends \Yii\base\Object
 {
     public $mail;
 
@@ -23,10 +24,10 @@ class BaseMailer extends \Yii\base\Component
     public $subject;
     public $body;
 
-    protected $addresses = array();
-
     public function init()
     {
+        parent::init();
+
         $this->mail = new \PHPMailer();
         $this->mail->IsSMTP();
         $this->mail->SMTPSecure = 'tls';
@@ -46,18 +47,21 @@ class BaseMailer extends \Yii\base\Component
 
     public function send()
     {
-        if(count($this->addresses) < 1)
-            throw new Exception(500, 'Addresses have not been supplied');
-
         if(!$this->mail->send())
-            throw new Exception(500, 'Unable to save email');
-
-        $this->email->status = ScheduledEmailTask::STATUS_SCHEDULED;
-        $this->email->save();
+            throw new Exception(500, 'Unable to send email');
     }    
+
+    public function addAddress($address, $name=null)
+    {
+        if($name != null)
+            $this->mail->addAddress($address, $name);
+        else
+            $this->mail->addAddress($address);
+    }
 
     public function addSubject($subject)
     {
+        $this->subject = $subject;
         $this->mail->Subject = $subject;
     }
 

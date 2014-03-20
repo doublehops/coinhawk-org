@@ -4,8 +4,10 @@ namespace app\commands;
 
 use app\models\Exchange;
 use app\models\Market;
+use app\models\EmailRecipient;
 use app\models\ScheduledEmailTask;
 use yii\console\Controller;
+use app\components\BaseMailer;
 
 class RunScheduledTasksController extends Controller
 {
@@ -20,13 +22,18 @@ class RunScheduledTasksController extends Controller
 
         foreach($tasks as $task) {
 
-            $body = $this->renderPartial('//mail/template.php', ['content'=>$task->body], true);
+                $body = $this->renderPartial('//mail/template.php', ['content'=>$task->body], true);
 
-            $mail = \Yii::$app->getComponent('baseMailer');
-            $mail->addAddress($task->to, $task->to_name);
-            $mail->addSubject($task->subject);
-            $mail->addBody($body);
-            $mail->send();
+            foreach($task->recipients as $recipient) {
+
+                $mail = \Yii::createObject(['class'=>'app\components\BaseMailer']);
+                $mail->addAddress($recipient->email, $recipient->name);
+                $mail->addSubject($task->subject);
+                $mail->addBody($body);
+                $mail->send();
+
+                unset($mail);
+            }
 
             $task->status = ScheduledEmailTask::STATUS_COMPLETED;
             $task->save();
