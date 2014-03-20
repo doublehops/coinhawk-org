@@ -17,6 +17,7 @@ class MarketController extends Controller
 {
     public function actionTest()
     {
+        die(\Yii::$app->params['mailHost']);
         $email = new ScheduledEmailTask;
 
         $email->from = 'damien@doublehops.com';

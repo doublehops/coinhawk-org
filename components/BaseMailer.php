@@ -3,20 +3,15 @@
 namespace app\components;
 
 use \app\models\ScheduledEmailTask;
-use \yii\base\HttpException;
 
 
 class BaseMailer extends \Yii\base\Object
 {
     public $mail;
 
-    public $host = 'mail.doublehops.com';
-    public $username = 'damien@doublehops.com';
-    public $password = 'dbSduis_923!1';
-
-    public $from = 'damien@doublehops.com';
-    public $fromName = 'Coin Hawk';
-
+    /**
+     * Initialise mailer with configuration
+     */
     public function init()
     {
         parent::init();
@@ -29,11 +24,11 @@ class BaseMailer extends \Yii\base\Object
         $this->mail->SMTPDebug = 0;
         $this->mail->IsHTML(true);
 
-        $this->mail->Host = $this->host;
-        $this->mail->Username = $this->username;
-        $this->mail->Password = $this->password;
-        $this->mail->From = $this->from;
-        $this->mail->FromName = $this->fromName;
+        $this->mail->Host = \Yii::$app->params['mailHost'];
+        $this->mail->Username = \Yii::$app->params['mailUsername'];
+        $this->mail->Password = \Yii::$app->params['mailPassword'];
+        $this->mail->From = \Yii::$app->params['mailFrom'];
+        $this->mail->FromName = \Yii::$app->params['mailFromName'];
 
         $this->mail->status = ScheduledEmailTask::STATUS_IDLE;
     }
@@ -41,7 +36,7 @@ class BaseMailer extends \Yii\base\Object
     public function send()
     {
         if(!$this->mail->send())
-            throw new Exception(500, 'Unable to send email');
+            die('Unable to send mail.');
     }    
 
     public function addAddress($address, $name=null)
@@ -59,19 +54,6 @@ class BaseMailer extends \Yii\base\Object
 
     public function addBody($body)
     {
-        $this->mail->Body = $body;
-    }
-
-    /**
-     * @todo: Get renderView to work within the component so body can be called 
-     * with, for eg. $mail->addBody('_newMarket', ['market'=>$market]);
-     *
-     * Add body by passing the view and variables
-     */
-    public function addBodyNew($view, $params=array())
-    {
-        $content = \Yii\base\Controller::renderPartial('//mail/'. $view, $params, true);
-        $body = \Yii\base\Controller::renderPartial('//mail/template', ['content'=>$content], true);
         $this->mail->Body = $body;
     }
 }

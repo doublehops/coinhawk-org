@@ -14,6 +14,7 @@ use yii\helpers\Html;
     <title><?= Html::encode($this->title) ?></title>
 </head>
 <body>
+    <h1>Coin Hawk Mail</h1>
     <?= $content ?>
 </body>
 </html>
