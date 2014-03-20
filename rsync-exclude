@@ -1,0 +1,6 @@
+.git
+.sql
+/web/assets
+/vendor
+sync-prod
+rsync-exclude
