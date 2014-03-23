@@ -1,1 +1,1 @@
-<div id="" class="chart-container" style="width:100%; height:400px;" data-history="<?= $history ?>" data-market-name="<?= $model->label ?>"></div>
+<div id="chart-<?= $model->id ?>" class="chart-container" style="width:100%; height:400px;" data-market-name="<?= $model->label ?>" data-id="<?= $model->id ?>":></div>

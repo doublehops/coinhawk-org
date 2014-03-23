@@ -60,6 +60,15 @@ class MarketController extends Controller
 		]);
 	}
 
+    public function actionFetchChartData($id)
+    {
+        $model = $this->findModel($id);
+        $times = TimeHelper::last7days();
+        $history = $model->getHistoryData($id, $times[0], $times[1]);
+        header('Content-type: application/json');
+        echo $history;
+    }
+
     public function actionFullListing()
     {
         $model =  Market::find()->all();
