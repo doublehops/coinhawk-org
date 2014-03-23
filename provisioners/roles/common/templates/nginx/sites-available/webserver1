@@ -1,14 +1,16 @@
 server {
+	set $yii_bootstrap "index.php";
+
 	#listen   80; ## listen for ipv4; this line is default and implied
 	#listen   [::]:80 default_server ipv6only=on; ## listen for ipv6
 
 	root /var/www/web;
-	index index.php index.html index.htm;
+	index $yii_bootstrap;
 
 	server_name coinhawk-dev;
 
 	location / {
-		try_files $uri $uri/ /index.html;
+		try_files $uri $uri/ /$yii_bootstrap?$args;
 	}
 
 	sendfile off;
@@ -26,22 +28,17 @@ server {
 	#
 	location ~ \.php$ {
 	
-	    root /var/www/web;
-        if (!-f $request_filename) {
-            return 404;
-        }
-
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        include        fastcgi_params;
+        	fastcgi_pass unix:/var/run/php5-fpm.sock;
+        	fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        	include        fastcgi_params;
 	}
 
 	# deny access to .htaccess files, if Apache's document root
 	# concurs with nginx's one
 	#
-	#location ~ /\.ht {
-	#	deny all;
-	#}
+	location ~ /\.(ht|svn|git|sql) {
+		deny all;
+	}
 }
 
 
