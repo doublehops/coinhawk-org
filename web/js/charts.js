@@ -1,24 +1,24 @@
 
 console.log('charts loading aaa');
 
-//var data = [5, 7, 3, 6, 6, 2, 8, 9, 1];
-var data = $('#chart-container').data('history');
-console.log(data);
+var data = $('.chart-container').data('history');
+var text = $('.chart-container').data('market-name');
+var marketName = $('#chart-container').data('market-name');
 
-        $('#chart-container').highcharts('StockChart', {
+        $('.chart-container').highcharts('StockChart', {
             
 
             rangeSelector : {
                 selected : 1,
-                inputEnabled: $('#chart-container').width() > 480
+                inputEnabled: $('.chart-container').width() > 480
             },
 
             title : {
-                text : 'AAPL Stock Price'
+                text : text
             },
             
             series : [{
-                name : 'AAPL',
+                name : marketName,
                 data : data,
                 tooltip: {
                     valueDecimals: 2

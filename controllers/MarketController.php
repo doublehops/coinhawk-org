@@ -60,6 +60,11 @@ class MarketController extends Controller
 		]);
 	}
 
+    public function actionFullListing()
+    {
+        $model =  Market::find()->all();
+    }
+
 	/**
 	 * Creates a new Market model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.

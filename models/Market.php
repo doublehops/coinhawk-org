@@ -42,7 +42,7 @@ class Market extends BaseModel
 
         foreach($records as $record) {
 
-            $history[] = $record['price'];
+            $history[] = '['. strtotime($record['created_at'])*1000 .','. $record['price'] .']';
         }
 
         $history = implode(',', $history);
