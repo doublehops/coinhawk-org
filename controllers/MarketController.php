@@ -60,10 +60,10 @@ class MarketController extends Controller
 		]);
 	}
 
-    public function actionFetchChartData($id)
+    public function actionFetchChartData($id, $time)
     {
         $model = $this->findModel($id);
-        $times = TimeHelper::last7days();
+        $times = call_user_func('app\components\TimeHelper::'. $time);
         $history = $model->getHistoryData($id, $times[0], $times[1]);
         header('Content-type: application/json');
         echo $history;

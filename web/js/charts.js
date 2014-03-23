@@ -8,7 +8,8 @@ function loadCharts() {
 
   $.each( $('.chart-container'), function(index, value) {
     var chartId = $(this).data('id');
-    $.get('/market/fetch-chart-data?id='+ chartId, function(marketData) {
+    var time = $(this).data('time');
+    $.get('/market/fetch-chart-data?id='+ chartId +'&time='+ time, function(marketData) {
         loadChart(chartId, marketData);
     });
   });

@@ -15,4 +15,9 @@ class TimeHelper extends \Yii\base\Object
     {
         return [date('Y-m-d H:i:s', time() - 7*self::DAYS), date('Y-m-d H:i:s')];
     }
+
+    public static function last30Days()
+    {
+        return [date('Y-m-d H:i:s', time() - 30*self::DAYS), date('Y-m-d H:i:s')];
+    }
 }
