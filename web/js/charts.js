@@ -21,6 +21,8 @@ function loadChart(chartId,data) {
   var text = chart.data('market-name');
   var marketName = chart.data('market-name');
 
+  chart.parent().find('.mask').removeClass('mask');
+
   chart.highcharts('StockChart', {
   
     rangeSelector : {

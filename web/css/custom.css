@@ -1,4 +1,5 @@
 .market-container {
+    position: relative;
     padding: 5px;
     margin-bottom: 5px;
     border: 1px solid #ddd;
@@ -6,4 +7,11 @@
 
 .market-container h3 {
     margin-left: 7px;
+}
+
+.market-container .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(/images/loader.gif) #ddd center center;
 }
