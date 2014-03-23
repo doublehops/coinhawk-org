@@ -9,6 +9,7 @@ use app\models\search\MarketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\VerbFilter;
+use app\components\TimeHelper;
 
 /**
  * MarketController implements the CRUD actions for Market model.
@@ -48,9 +49,14 @@ class MarketController extends Controller
 	 * @return mixed
 	 */
 	public function actionView($id)
-	{
+    {
+        $model = $this->findModel($id);
+        $times = TimeHelper::last7days();
+        $history = $model->getHistoryData($id, $times[0], $times[1]);
+
 		return $this->render('view', [
-			'model' => $this->findModel($id),
+			'model' => $model,
+            'history' => $history,
 		]);
 	}
 

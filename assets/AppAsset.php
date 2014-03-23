@@ -21,6 +21,8 @@ class AppAsset extends AssetBundle
 		'css/site.css',
 	];
 	public $js = [
+        'js/highstock.src.js',
+        'js/charts.js',
 	];
 	public $depends = [
 		'yii\web\YiiAsset',
