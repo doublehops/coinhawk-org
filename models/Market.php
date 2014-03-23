@@ -38,7 +38,7 @@ class Market extends BaseModel
 
         $records =  (new \yii\db\Query())->select('*')->from('market_history')
             ->where('created_at >= \''. $startTime .'\' AND created_at <= \''. $endTime .'\' AND market_id='. $marketId)
-            ->limit(10)->all();
+            ->all();
 
         foreach($records as $record) {
 

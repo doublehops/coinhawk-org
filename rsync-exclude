@@ -1,6 +1,7 @@
 .git
 .sql
-/web/assets
-/vendor
+web/assets/
+vendor
 sync-prod
 rsync-exclude
+runtime

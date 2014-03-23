@@ -16,14 +16,15 @@ function loadCharts() {
 
 function loadChart(chartId,data) {
 
-  var text = $('.chart-container').data('market-name');
-  var marketName = $('.chart-container').data('market-name');
+  var chart = $('#chart-'+ chartId);
+  var text = chart.data('market-name');
+  var marketName = chart.data('market-name');
 
-  $('#chart-'+ chartId).highcharts('StockChart', {
+  chart.highcharts('StockChart', {
   
     rangeSelector : {
       selected : 1,
-      inputEnabled: $('chart-'+ chartId).width() > 480
+      inputEnabled: chart.width() > 480
     },
   
     title : {
