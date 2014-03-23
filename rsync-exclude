@@ -5,3 +5,6 @@ vendor
 sync-prod
 rsync-exclude
 runtime
+provisioners
+Vagrantfile
+.vagrant
