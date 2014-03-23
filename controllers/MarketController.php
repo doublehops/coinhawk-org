@@ -71,7 +71,9 @@ class MarketController extends Controller
 
     public function actionFullListing()
     {
-        $model =  Market::find()->all();
+        $markets =  Market::find()->all();
+
+        echo $this->render('fullListing', ['markets' => $markets]);
     }
 
 	/**
