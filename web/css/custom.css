@@ -1,0 +1,9 @@
+.market-container {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+}
+
+.market-container h3 {
+    margin-left: 7px;
+}
