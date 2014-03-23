@@ -1,3 +1,4 @@
 .vagrant
 web/assets
 config/local.php
+runtime
