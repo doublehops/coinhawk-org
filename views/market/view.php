@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
  * @var app\models\Market $model
  */
 
-$this->title = $model->id;
+$this->title = $model->label .' - '. $model->primary_name .' / '. $model->secondary_name;
 $this->params['breadcrumbs'][] = ['label' => 'Markets', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
