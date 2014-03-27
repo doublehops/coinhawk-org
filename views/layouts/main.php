@@ -19,6 +19,8 @@ AppAsset::register($this);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?= Html::encode($this->title) ?></title>
 	<?php $this->head() ?>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 

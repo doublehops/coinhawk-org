@@ -52,11 +52,11 @@ class MarketController extends Controller
     {
         $model = $this->findModel($id);
         $times = TimeHelper::last7days();
-        $history = $model->getHistoryData($id, $times[0], $times[1]);
+        $historyData = $model->getHistoryData($id, $times[0], $times[1]);
 
 		return $this->render('view', [
 			'model' => $model,
-            'history' => $history,
+            'history' => $historyData,
 		]);
 	}
 

@@ -24,6 +24,26 @@ namespace app\models;
  */
 class Market extends BaseModel
 {
+    // Is there a notification to show for market
+    public $notification = false;
+    // What class should be shown for notification
+    public $notificationClass;
+
+    public function init()
+    {
+        parent::init();
+
+        if($this->created_at < date('Y-m-d H:i:s', time()-60*60*24)) {
+            $this->notification = 'Old Market';
+            $this->notificationClass = 'market-old';
+        }
+
+        if($this->created_at > date('Y-m-d H:i:s', time()-60*60*24*7)) {
+            $this->notification = 'New Market';
+            $this->notificationClass = 'market-new';
+        }
+    }
+
 	/**
 	 * @inheritdoc
 	 */
@@ -32,6 +52,15 @@ class Market extends BaseModel
 		return 'market';
 	}
 
+    /**
+     * Get history data formatted for Highcharts
+     *
+     * @param integer $marketId market.id
+     * @param date $startTime
+     * @param date @endTime
+     *
+     * @return JSON
+     */
     public function getHistoryData($marketId, $startTime, $endTime)
     {
         $history = [];
@@ -95,6 +124,14 @@ class Market extends BaseModel
 	public function getExchange()
 	{
 		return $this->hasOne(Exchange::className(), ['id' => 'exchange_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getHistory()
+	{
+		return $this->hasMany(MarketHistory::className(), ['id' => 'market_id']);
 	}
 
 	/**
