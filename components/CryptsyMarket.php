@@ -4,8 +4,6 @@ namespace app\components;
 
 class CryptsyMarket extends \yii\base\Component
 {
-    protected $_url = 'http://pubapi.cryptsy.com/api.php?method=marketdatav2';
-
     public function init() {}
 
     /**
@@ -15,7 +13,7 @@ class CryptsyMarket extends \yii\base\Component
      */ 
     public function getMarketData()
     {
-        $marketData = file_get_contents($this->_url);
+        $marketData = $this->fetchData();
         //$marketData = file_get_contents('/var/www/marketdata.json');
         $marketData = $this->formatJson($marketData);
 
@@ -36,6 +34,25 @@ class CryptsyMarket extends \yii\base\Component
         }
 
         return $data;
+    }
+
+    protected function fetchData()
+    {
+        static $ch = null;
+        if (is_null($ch)) {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; Cryptsy API PHP client; '.php_uname('s').'; PHP/'.phpversion().')');
+        }
+        curl_setopt($ch, CURLOPT_URL, 'http://pubapi.cryptsy.com/api.php');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['method'=>'marketdatav2']));
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+ 
+        // run the query
+        $res = curl_exec($ch);
+
+        return $res;
     }
 
     /**
