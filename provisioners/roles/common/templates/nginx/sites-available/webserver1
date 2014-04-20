@@ -7,7 +7,7 @@ server {
 	root /var/www/web;
 	index $yii_bootstrap;
 
-	server_name coinhawk-dev;
+	server_name coinhawk;
 
 	location / {
 		try_files $uri $uri/ /$yii_bootstrap?$args;
