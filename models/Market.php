@@ -29,19 +29,20 @@ class Market extends BaseModel
     // What class should be shown for notification
     public $notificationClass;
 
-    public function init()
+    /**
+     * Determine whether market has not been updated for 24 hours
+     */
+    public function isOldMarket()
     {
-        parent::init();
+        return $this->updated_at < date('Y-m-d H:i:s', time()-86400) ? true : false;
+    }
 
-        if($this->created_at < date('Y-m-d H:i:s', time()-60*60*24)) {
-            $this->notification = 'Old Market';
-            $this->notificationClass = 'market-old';
-        }
-
-        if($this->created_at > date('Y-m-d H:i:s', time()-60*60*24*7)) {
-            $this->notification = 'New Market';
-            $this->notificationClass = 'market-new';
-        }
+    /**
+     * Determine whether market was cread in the last 7 days
+     */
+    public function isNewMarket()
+    {
+        return $this->created_at > date('Y-m-d H:i:s', time()-86400*7) ? true : false;
     }
 
 	/**
