@@ -8,3 +8,4 @@ runtime
 provisioners
 Vagrantfile
 .vagrant
+config/db.php

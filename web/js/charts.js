@@ -23,8 +23,15 @@ function loadChart(chartId,data) {
 
   chart.parent().find('.mask').removeClass('mask');
 
+  Highcharts.setOptions({
+    global : {
+    }
+  });
+
   chart.highcharts('StockChart', {
   
+    global : {
+    },
     rangeSelector : {
       selected : 1,
       inputEnabled: chart.width() > 480
