@@ -1,5 +1,5 @@
 <?php
 
 foreach($markets as $market) {
-    echo $this->render('_chart', ['market'=>$market]);
+    echo $this->render('_chart', ['market'=>$market, 'period'=>'last7Days']);
 }
