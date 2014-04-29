@@ -60,16 +60,16 @@ class MarketController extends Controller
 		]);
 	}
 
-    public function actionFetchChartData($id, $time)
+    public function actionFetchChartData($id, $period)
     {
         $model = $this->findModel($id);
-        $times = call_user_func('app\components\TimeHelper::'. $time);
+        $times = call_user_func('app\components\TimeHelper::'. $period);
         $history = $model->getHistoryData($id, $times[0], $times[1]);
         header('Content-type: application/json');
         echo $history;
     }
 
-    public function actionFullListing($id)
+    public function actionFullListing($id, $timePeriod=null)
     {
         $markets =  Market::find()->where(['exchange_id'=>$id])->all();
 
