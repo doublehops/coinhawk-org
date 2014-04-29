@@ -1,0 +1,6 @@
+#!/bin/bash
+
+src=.
+dest=dhwebsyd:/var/www/coinhawk.net
+
+rsync -avz --exclude-from rsync-exclude $src $dest
