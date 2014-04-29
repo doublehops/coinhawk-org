@@ -25,13 +25,12 @@ function loadChart(chartId,data) {
 
   Highcharts.setOptions({
     global : {
+      useUTC : false,
     }
   });
 
   chart.highcharts('StockChart', {
   
-    global : {
-    },
     rangeSelector : {
       selected : 1,
       inputEnabled: chart.width() > 480
