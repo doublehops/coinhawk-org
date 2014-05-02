@@ -15,6 +15,7 @@ function loadCharts() {
 
 function populateChart(market) {
   var marketId = market.data('id');
+  showMask(marketId);
   var period = $('#market-'+ marketId).find('.chart-inputs .time-period').val();
   $.get('/market/fetch-chart-data?id='+ marketId +'&period='+ period, function(marketData) {
       loadChart(marketId, marketData);
@@ -68,7 +69,6 @@ function initInputChangeCapture() {
 
   $('.chart-input').on('change', function() {
     var marketId = $(this).data('market-id');
-    showMask(marketId);
     populateChart($('#market-'+ marketId));
   });
 }
