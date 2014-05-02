@@ -26,7 +26,6 @@ function loadChart(marketId,data) {
   var text = chart.data('market-name');
   var marketName = chart.data('market-name');
 
-  //$('#market-'+ marketId).find('.mask').removeClass('mask');
   hideMask(marketId);
 
   Highcharts.setOptions({
@@ -57,11 +56,11 @@ function loadChart(marketId,data) {
 }
 
 function showMask(marketId) {
-  $('#market-'+ marketId).addClass('mask');
+  $('#market-'+ marketId).addClass('container-mask');
 }
 
 function hideMask(marketId) {
-  $('#market-'+ marketId).removeClass('mask');
+  $('#market-'+ marketId).removeClass('container-mask');
 }
 
 function initInputChangeCapture() {

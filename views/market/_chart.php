@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use app\components\ChartHelper;
 ?>
-<div class="market-container mask" id="market-<?= $market->id ?>" data-market-name="<?= $market->label ?>" data-id="<?= $market->id ?>">
+<div class="market-container container-mask" id="market-<?= $market->id ?>" data-market-name="<?= $market->label ?>" data-id="<?= $market->id ?>">
     <div class="mask"></div>
     <div class="chart-inputs">
         <?= ChartHelper::chartInput('chart', $period, 'TimePeriods', $market->id); ?>
