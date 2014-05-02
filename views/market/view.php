@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="market-view">
 
-    <?= $this->render('_chart', ['market'=>$model, 'period'=>'last30Days']); ?>
+    <?= $this->render('_chart', ['market'=>$model, 'period'=>'last7Days']); ?>
 
 	<h1><?= Html::encode($this->title) ?></h1>
 
