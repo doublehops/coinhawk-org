@@ -7,7 +7,8 @@ use app\models\Exchange;
 use app\models\search\ExchangeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ExchangeController implements the CRUD actions for Exchange model.
@@ -23,6 +24,22 @@ class ExchangeController extends Controller
 					'delete' => ['post'],
 				],
 			],
+            'accessi' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','update','delete','view'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update', 'delete', 'create'],
+                        'roles' => ['@'],
+                    ],
+                ]
+            ]
 		];
 	}
 
@@ -111,7 +128,7 @@ class ExchangeController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if ($id !== null && ($model = Exchange::find($id)) !== null) {
+		if ($id !== null && ($model = Exchange::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');
