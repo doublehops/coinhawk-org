@@ -6,22 +6,26 @@ $( document ).ready(function() {
 
 function loadCharts() {
 
-  $.each( $('.chart-container'), function(index, value) {
-    var chartId = $(this).data('id');
-    var period = $(this).data('period');
-    $.get('/market/fetch-chart-data?id='+ chartId +'&period='+ period, function(marketData) {
-        loadChart(chartId, marketData);
-    });
+  $.each( $('.market-container'), function(index, value) {
+    populateChart($(this));
   });
 }
 
-function loadChart(chartId,data) {
+function populateChart(market) {
+  var marketId = market.data('id');
+  var period = market.find('.chart-inputs .time-period').val();
+  $.get('/market/fetch-chart-data?id='+ marketId +'&period='+ period, function(marketData) {
+      loadChart(marketId, marketData);
+  });
+}
 
-  var chart = $('#chart-'+ chartId);
+function loadChart(marketId,data) {
+
+  var chart = $('#market-'+ marketId +' .chart-container');
   var text = chart.data('market-name');
   var marketName = chart.data('market-name');
 
-  chart.parent().find('.mask').removeClass('mask');
+  $('#market-'+ marketId).find('.mask').removeClass('mask');
 
   Highcharts.setOptions({
     global : {
