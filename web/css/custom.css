@@ -15,7 +15,7 @@
     height: 100%;
     background: url(/images/loader.gif) #ddd center center;
     z-index: 999;
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .market-old {
@@ -26,4 +26,9 @@
 .market-new {
     margin-right: 10px;
     color: green;
+}
+
+.chart-inputs {
+    text-align: right;
+    margin: 10px;
 }
