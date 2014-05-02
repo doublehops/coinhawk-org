@@ -7,7 +7,8 @@ use app\models\SiteConfig;
 use app\models\search\SiteConfigSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * SiteConfigController implements the CRUD actions for SiteConfig model.
@@ -23,6 +24,22 @@ class SiteConfigController extends Controller
 					'delete' => ['post'],
 				],
 			],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','update','delete','view'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['test'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update', 'delete', 'create'],
+                        'roles' => ['@'],
+                    ],
+                ]
+            ],
 		];
 	}
 
@@ -111,7 +128,7 @@ class SiteConfigController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if ($id !== null && ($model = SiteConfig::find($id)) !== null) {
+		if ($id !== null && ($model = SiteConfig::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

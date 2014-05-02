@@ -26,7 +26,7 @@ class MarketController extends Controller
 					'delete' => ['post'],
 				],
 			],
-            'accessi' => [
+            'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['create','update','delete','view','full-listing'],
                 'rules' => [

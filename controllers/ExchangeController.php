@@ -24,7 +24,7 @@ class ExchangeController extends Controller
 					'delete' => ['post'],
 				],
 			],
-            'accessi' => [
+            'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['create','update','delete','view'],
                 'rules' => [
