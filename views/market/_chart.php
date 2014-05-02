@@ -6,6 +6,7 @@ use app\components\ChartHelper;
     <div class="mask"></div>
     <div class="chart-inputs">
         <?= ChartHelper::chartInput('chart', $period, 'TimePeriods', $market->id); ?>
+        <img src="/images/refresh.jpg" class="chart-refresh" data-id="<?= $market->id ?>" />
     </div>
     <h3><?= Html::a($market->primary_name .' / '. $market->secondary_name, array('market/view', 'id'=>$market->id)) ?>
         <?php if($market->isNewMarket()) : ?><span class="pull-right market-new">New Market</span><?php endif ?>

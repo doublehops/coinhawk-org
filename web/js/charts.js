@@ -3,6 +3,7 @@
 $( document ).ready(function() {
   loadCharts();
   initInputChangeCapture();
+  initChartRefresh();
 });
 
 function loadCharts() {
@@ -14,7 +15,7 @@ function loadCharts() {
 
 function populateChart(market) {
   var marketId = market.data('id');
-  var period = market.find('.chart-inputs .time-period').val();
+  var period = $('#market-'+ marketId).find('.chart-inputs .time-period').val();
   $.get('/market/fetch-chart-data?id='+ marketId +'&period='+ period, function(marketData) {
       loadChart(marketId, marketData);
   });
@@ -69,5 +70,11 @@ function initInputChangeCapture() {
     var marketId = $(this).data('market-id');
     showMask(marketId);
     populateChart($('#market-'+ marketId));
+  });
+}
+
+function initChartRefresh() {
+  $('.chart-refresh').on('click', function() {
+    populateChart($(this));
   });
 }
