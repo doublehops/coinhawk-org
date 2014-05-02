@@ -8,8 +8,9 @@ use app\models\ScheduledEmailTask;
 use app\models\search\MarketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 use app\components\TimeHelper;
+use yii\filters\AccessControl;
 
 /**
  * MarketController implements the CRUD actions for Market model.
@@ -25,6 +26,22 @@ class MarketController extends Controller
 					'delete' => ['post'],
 				],
 			],
+            'accessi' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','update','delete','view','full-listing'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['full-listing', 'view'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update', 'delete', 'create'],
+                        'roles' => ['@'],
+                    ],
+                ]
+            ]
 		];
 	}
 
@@ -134,7 +151,7 @@ class MarketController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if ($id !== null && ($model = Market::find($id)) !== null) {
+		if ($id !== null && ($model = Market::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

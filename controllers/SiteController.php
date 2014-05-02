@@ -3,11 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use yii\web\AccessControl;
 use yii\web\Controller;
 use yii\web\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\filters\AccessControl;
 
 class SiteController extends Controller
 {
@@ -15,7 +15,7 @@ class SiteController extends Controller
 	{
 		return [
 			'access' => [
-				'class' => AccessControl::className(),
+                'class' => AccessControl::className(),
 				'only' => ['logout'],
 				'rules' => [
 					[
@@ -26,7 +26,7 @@ class SiteController extends Controller
 				],
 			],
 			'verbs' => [
-				'class' => VerbFilter::className(),
+                'class' => '\yii\filters\VerbFilter',
 				'actions' => [
 					'logout' => ['post'],
 				],
