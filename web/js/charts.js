@@ -51,7 +51,7 @@ function loadChart(marketId,data) {
       name : marketName,
       data : data,
       tooltip: {
-        valueDecimals: 9
+        valueDecimals: 8
       }
     }]
   });
