@@ -2,6 +2,7 @@
 
 $( document ).ready(function() {
   loadCharts();
+  initInputChangeCapture();
 });
 
 function loadCharts() {
@@ -25,7 +26,8 @@ function loadChart(marketId,data) {
   var text = chart.data('market-name');
   var marketName = chart.data('market-name');
 
-  $('#market-'+ marketId).find('.mask').removeClass('mask');
+  //$('#market-'+ marketId).find('.mask').removeClass('mask');
+  hideMask(marketId);
 
   Highcharts.setOptions({
     global : {
@@ -51,5 +53,22 @@ function loadChart(marketId,data) {
         valueDecimals: 9
       }
     }]
+  });
+}
+
+function showMask(marketId) {
+  $('#market-'+ marketId).addClass('mask');
+}
+
+function hideMask(marketId) {
+  $('#market-'+ marketId).removeClass('mask');
+}
+
+function initInputChangeCapture() {
+
+  $('.chart-input').on('change', function() {
+    var marketId = $(this).data('market-id');
+    showMask(marketId);
+    populateChart($('#market-'+ marketId));
   });
 }

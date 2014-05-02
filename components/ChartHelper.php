@@ -14,13 +14,14 @@ class ChartHelper extends \Yii\base\Object
         );    
     }
 
-    public static function chartInput($input, $default, $chartType)
+    public static function chartInput($input, $default, $chartType, $marketId)
     {
         echo BaseHtml::dropDownList($input,
                                  $default,
                                  call_user_func('self::get'. $chartType),
                                  array(
                                      'class'=>'chart-input time-period',
+                                     'data-market-id'=>$marketId,
                                  )
              );
     }

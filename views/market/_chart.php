@@ -2,10 +2,10 @@
 use yii\helpers\Html;
 use app\components\ChartHelper;
 ?>
-<div class="market-container" id="market-<?= $market->id ?>" data-market-name="<?= $market->label ?>" data-id="<?= $market->id ?>">
+<div class="market-container mask" id="market-<?= $market->id ?>" data-market-name="<?= $market->label ?>" data-id="<?= $market->id ?>">
     <div class="mask"></div>
     <div class="chart-inputs">
-        <?= ChartHelper::chartInput('chart', $period, 'TimePeriods'); ?>
+        <?= ChartHelper::chartInput('chart', $period, 'TimePeriods', $market->id); ?>
     </div>
     <h3><?= Html::a($market->primary_name .' / '. $market->secondary_name, array('market/view', 'id'=>$market->id)) ?>
         <?php if($market->isNewMarket()) : ?><span class="pull-right market-new">New Market</span><?php endif ?>
