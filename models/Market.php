@@ -174,7 +174,7 @@ class Market extends BaseModel
 
             $model->save();
 
-            $siteConfig = SiteConfig::find(1);
+            $siteConfig = SiteConfig::findOne(1);
 
             if($newMarket && $siteConfig->send_notifications == 1) {
                 // @todo: Have this chunk of code working in it's own method
