@@ -5,6 +5,7 @@ use app\components\ChartHelper;
 <div class="market-container container-mask" id="market-<?= $market->id ?>" data-market-name="<?= $market->label ?>" data-id="<?= $market->id ?>">
     <div class="mask"></div>
     <div class="chart-inputs">
+        <?= Html::a('Cryptsy Page', str_replace('<id>', $market->market_id, $market->exchange->market_page_url), ['target'=>'_blank']) ?>
         <?= ChartHelper::chartInput('chart', $period, 'TimePeriods', $market->id); ?>
         <img src="/images/refresh.jpg" class="chart-refresh" data-id="<?= $market->id ?>" />
     </div>
