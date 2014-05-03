@@ -12,12 +12,12 @@ class RunScheduledTasksController extends Controller
 {
     public function actionSendNotifications()
     {
-        $tasks = ScheduledEmailTask::findAll()->where(
+        $tasks = ScheduledEmailTask::find()->where(
                             'status=:status && scheduled_at<:current_time',
                                 [':status' => ScheduledEmailTask::STATUS_SCHEDULED,
                                  ':current_time' => date('Y-m-d H:i:s'),
                                 ]
-                            );
+                            )->all();
 
         foreach($tasks as $task) {
 
