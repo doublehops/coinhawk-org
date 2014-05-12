@@ -86,11 +86,11 @@ class MarketController extends Controller
         echo $history;
     }
 
-    public function actionFullListing($id, $timePeriod=null)
+    public function actionFullListing($id, $period='last&Days')
     {
         $markets =  Market::find()->where(['exchange_id'=>$id])->all();
 
-        echo $this->render('fullListing', ['markets' => $markets]);
+        echo $this->render('fullListing', ['markets' => $markets,'period'=>$period]);
     }
 
 	/**
