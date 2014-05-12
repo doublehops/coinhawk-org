@@ -29,8 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\SerialColumn'],
 
 			'id',
-			'exchange_id',
+			'exchange.name',
 			'market_id',
+            'primary_name',
 			'label',
 			'last_trade_price',
 			// 'volume',
