@@ -6,6 +6,7 @@ $this->title = 'Coin Hawk';
 
 	<div class="jumbotron">
         <h1>Coin Hawk</h1>
+        <h4>(pre-alpha)</h4>
 	</div>
 
 	<div class="body-content">
