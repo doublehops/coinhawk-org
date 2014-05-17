@@ -17,11 +17,6 @@ use yii\filters\AccessControl;
  */
 class MarketController extends Controller
 {
-    public function actionTestMintpal()
-    {
-        $data = \Yii::$app->MintpalMarket->getMarketData(); 
-    }
-
 	public function behaviors()
 	{
 		return [
