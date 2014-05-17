@@ -27,6 +27,9 @@ return [
         'cryptsyMarket' => [
             'class' => 'app\components\CryptsyMarket',
         ],
+        'MintpalMarket' => [
+            'class' => 'app\components\MintPalMarket',
+        ],
 	],
 	'params' => $params,
 ];
