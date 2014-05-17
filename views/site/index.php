@@ -18,7 +18,14 @@ $this->title = 'Coin Hawk';
                     <li><?= Html::a('Cryptsy Markets', \Yii::$app->getUrlManager()->createUrl('/market/index')) ?></li>
                     <li><?= Html::a('Cryptsy Full Chart Listing - <strong>last 24 hours</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 1,'period'=>'last24Hours'])) ?></li>
                     <li><?= Html::a('Cryptsy Full Chart Listing - <strong>last 7 days</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 1,'period'=>'last7Days'])) ?></li>
-                    <li><hr /></li>
+                </ul>
+                <ul>
+                    <li><?= Html::a('Mintpal Markets', \Yii::$app->getUrlManager()->createUrl('/market/index')) ?></li>
+                    <li><?= Html::a('Mintpal Full Chart Listing - <strong>last 24 hours</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 2,'period'=>'last24Hours'])) ?></li>
+                    <li><?= Html::a('Mintpal Full Chart Listing - <strong>last 7 days</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 2,'period'=>'last7Days'])) ?></li>
+                </ul>
+                <hr />
+                <ul>
                     <li><?= Html::a('LTC/BTC', \Yii::$app->getUrlManager()->createUrl(['/market/view', 'id' => 99])) ?></li>
                     <li><?= Html::a('RDD/BTC', \Yii::$app->getUrlManager()->createUrl(['/market/view', 'id' => 149])) ?></li>
                     <li><?= Html::a('DOGE/BTC', \Yii::$app->getUrlManager()->createUrl(['/market/view', 'id' => 73])) ?></li>

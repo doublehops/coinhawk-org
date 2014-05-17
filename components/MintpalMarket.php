@@ -2,7 +2,7 @@
 
 namespace app\components;
 
-class MintPalMarket extends \yii\base\Component
+class MintpalMarket extends \yii\base\Component
 {
     public function init() {}
 
