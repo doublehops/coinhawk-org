@@ -201,4 +201,13 @@ class Market extends BaseModel
     {
         // @todo: move notification code to here
     }
+
+    public function getMarketPage()
+    {
+        if($this->exchange->name == 'Cryptsy')
+            return str_replace('<id>', $this->market_id, $this->exchange->market_page_url);
+
+        if($this->exchange->name == 'Mintpal')
+            return str_replace('<id>', $this->label , $this->exchange->market_page_url);
+    }
 }
