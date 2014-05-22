@@ -17,7 +17,7 @@ $this->title = 'Coin Hawk';
 
         <div class="row">
             <div class="col-sm-6">
-                <h2>Site Index</h2>
+                <h3>Site Index</h3>
                 <ul>
                     <li><?= Html::a('Market Listing/Search', \Yii::$app->getUrlManager()->createUrl('/market/index')) ?></li>
                 </ul>
@@ -39,7 +39,7 @@ $this->title = 'Coin Hawk';
                 </ul>
             </div>
             <div class="col-sm-6">
-                <h2>Sites of interest</h2>
+                <h3>Sites of interest</h3>
                 <ul>
                     <li><a href="https://bitcoinwisdom.com/" target="_blank">Bitcoin Wisdom</a></li>
                     <li><a href="http://www.coingecko.com/" target="_blank">CoinGecko (Crypto prospectus)</a></li>
