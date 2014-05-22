@@ -9,18 +9,23 @@ $this->title = 'Coin Hawk';
         <h4>(pre-alpha)</h4>
 	</div>
 
+    <div class="alert alert-info">
+        <p>Note: CoinHawk checks each exchange every five minutes and records the last price of each market. It's important to realise that it does not record all data that happens in each five minute period. Therefore it may not be a true reflection on what's happening in the markets but more of an indication.</p>
+    </div>
+
 	<div class="body-content">
 
         <div class="row">
             <div class="col-sm-6">
                 <h2>Site Index</h2>
                 <ul>
-                    <li><?= Html::a('Cryptsy Markets', \Yii::$app->getUrlManager()->createUrl('/market/index')) ?></li>
+                    <li><?= Html::a('Market Listing/Search', \Yii::$app->getUrlManager()->createUrl('/market/index')) ?></li>
+                </ul>
+                <ul>
                     <li><?= Html::a('Cryptsy Full Chart Listing - <strong>last 24 hours</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 1,'period'=>'last24Hours'])) ?></li>
                     <li><?= Html::a('Cryptsy Full Chart Listing - <strong>last 7 days</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 1,'period'=>'last7Days'])) ?></li>
                 </ul>
                 <ul>
-                    <li><?= Html::a('Mintpal Markets', \Yii::$app->getUrlManager()->createUrl('/market/index')) ?></li>
                     <li><?= Html::a('Mintpal Full Chart Listing - <strong>last 24 hours</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 2,'period'=>'last24Hours'])) ?></li>
                     <li><?= Html::a('Mintpal Full Chart Listing - <strong>last 7 days</strong> (CPU intensive)', \Yii::$app->getUrlManager()->createUrl(['/market/full-listing', 'id' => 2,'period'=>'last7Days'])) ?></li>
                 </ul>
