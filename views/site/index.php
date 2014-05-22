@@ -4,7 +4,7 @@ $this->title = 'Coin Hawk';
 ?>
 <div class="site-index">
 
-	<div class="jumbotron">
+	<div class="text-center">
         <h1>Coin Hawk</h1>
         <h4>(pre-alpha)</h4>
 	</div>
