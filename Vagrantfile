@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/debian-70rc1-x64-vbox4210-nocm.box"
+  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.4-i386_chef-provisionerless.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -59,6 +59,7 @@ end
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioners/playbook.yml"
       ansible.inventory_path = "provisioners/ansible_hosts"
+      ansible.limit = "all"
     end
   # # group { "puppet":
   # #   ensure => "present",
