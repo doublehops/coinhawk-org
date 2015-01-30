@@ -21,8 +21,9 @@ If you want to use the supplied virtual machine option you will need to install 
 1. Once installed, type *vagrant up*. This will take some time.
 2. Type *vagrant ssh* to ssh into the vm and change to path /var/www. *cd /var/www*
 3. Run *composer install* to install Yii and the project's dependencies.
-4. Run *yii migrate/up* to install the database tables.
-5. Add *192.168.33.12 coinhawk* to your hosts file: /etc/hosts for Mac/Linux
-6. Point your browser to http://coinhawk/
+4. Run *./yii migrate/up* to install the database tables.
+5. Create assets folder and set permissions: *mkdir web/assets && chmod 777 web/assets* 
+6. Add *192.168.33.12 coinhawk* to your hosts file: /etc/hosts for Mac/Linux
+7. Point your browser to http://coinhawk/
 
 Note that there are two cron jobs that are created to download to latest prices.
