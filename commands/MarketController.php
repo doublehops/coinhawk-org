@@ -16,9 +16,11 @@ class MarketController extends Controller
         $exchanges = Exchange::find()->all();
 
         foreach($exchanges as $exchange) {
-            $data = \Yii::$app->{$exchange->component}->getMarketData(); 
 
-            Market::updateData($exchange, $data);
+            if($exchange->active) {
+                $data = \Yii::$app->{$exchange->component}->getMarketData(); 
+                Market::updateData($exchange, $data);
+            }
         }
     }
 }
