@@ -26,6 +26,6 @@ If you want to use the supplied virtual machine option you will need to install 
 6. Add **192.168.33.12 coinhawk** to your hosts file: /etc/hosts for Mac/Linux
 7. Run this script to import the data: **/var/www/coinhawk.net/yii market/fetch-data**
 8. Run this script to send notifications on new markets: **/var/www/coinhawk.net/yii run-scheduled-tasks/send-notifications**
-9. Point your browser to http://coinhawk/
+9. Point your browser to **http://coinhawk/**
 
 Note: The two scripts should be added as cronjobs if you want them to auto update.
