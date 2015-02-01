@@ -18,14 +18,14 @@ git@github.com:doublehops/coinhawk.git coinhawk
 
 If you want to use the supplied virtual machine option you will need to install Vagrant and Ansible and follow these steps:
 
-1. Once installed, type *vagrant up*. This will take some time.
-2. Type *vagrant ssh* to ssh into the vm and change to path /var/www. *cd /var/www*
-3. Run *composer install* to install Yii and the project's dependencies.
-4. Run *./yii migrate/up* to install the database tables.
-5. Create assets folder and set permissions: *mkdir web/assets && chmod 777 web/assets* 
-6. Add *192.168.33.12 coinhawk* to your hosts file: /etc/hosts for Mac/Linux
-7. Run this script to import the data: */var/www/coinhawk.net/yii market/fetch-data*
-8. Run this script to send notifications on new markets: */var/www/coinhawk.net/yii run-scheduled-tasks/send-notifications*
+1. Once installed, type **vagrant up**. This will take some time.
+2. Type **vagrant ssh** to ssh into the vm and change to path /var/www. **cd /var/www**
+3. Run **composer install** to install Yii and the project's dependencies.
+4. Run **./yii migrate/up** to install the database tables.
+5. Create assets folder and set permissions: **mkdir web/assets && chmod 777 web/assets** 
+6. Add **192.168.33.12 coinhawk** to your hosts file: /etc/hosts for Mac/Linux
+7. Run this script to import the data: **/var/www/coinhawk.net/yii market/fetch-data**
+8. Run this script to send notifications on new markets: **/var/www/coinhawk.net/yii run-scheduled-tasks/send-notifications**
 9. Point your browser to http://coinhawk/
 
 Note: The two scripts should be added as cronjobs if you want them to auto update.
