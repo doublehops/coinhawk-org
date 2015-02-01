@@ -7,6 +7,12 @@
       - python-mysql.connector
       - python-mysqldb
 
+  - name: MariaDB | Set root password
+    mysql_user: name=root password={{ mariadb_root_password }} priv=*.*:ALL,GRANT state=present
+
+  - name: MariaDB | Copy root password config
+    template: src="{{ templates_dir }}/mariadb/my.cnf.j2" dest=~/.my.cnf
+
   - name: MariaDB | Update dev password for all dev accounts
     mysql_user: name=dev host={{ item }} password={{ mariadb_dev_password }} priv=*.*:ALL,GRANT
     with_items:
@@ -17,11 +23,3 @@
 
   - name: MariaDB | Create development database
     mysql_db: name={{ mariadb_database_name }}
-
-#  - name: MariaDB | Update root password for all root accounts
-#    mysql_user: name=root host={{ item }} password={{ mariadb_root_password }} priv=*.*:ALL,GRANT
-#    with_items:
-#      - "{{ ansible_hostname }}"
-#      - 127.0.0.1
-#      - ::1
-#      - localhost
