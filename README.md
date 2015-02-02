@@ -29,3 +29,8 @@ If you want to use the supplied virtual machine option you will need to install 
 9. Point your browser to **http://coinhawk/**
 
 Note: The two scripts should be added as cronjobs if you want them to auto update.
+
+EXCHANGES
+---------
+
+Unfortunately each feed from Cryptsy is now over 15MB in size so PHP memory and bandwidth can be issues here. Mintpal no longer exists. However it is quite straight forward to create a new component with Coinhawk for another exchange.
