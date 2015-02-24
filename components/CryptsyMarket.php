@@ -46,6 +46,7 @@ class CryptsyMarket extends \yii\base\Component
         }
         curl_setopt($ch, CURLOPT_URL, 'http://pubapi.cryptsy.com/api.php');
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['method'=>'marketdatav2']));
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['method'=>'singlemarketdata','marketid'=>3])); // Get data for single market
         curl_setopt($ch,CURLOPT_ENCODING , "");
 //        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
